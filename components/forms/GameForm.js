@@ -8,8 +8,6 @@ import InputSelect from './../inputs/InputSelect'
 import CheckboxInput from './../inputs/CheckboxInput'
 import createWebSocket, { ws } from '../../websocket'
 
-const difficulties = [ "Kid", "Easy", "Medium", "Hard" ]
-
 const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
   const onSubmit = values => {
     const { token } = JSON.parse(localStorage.getItem('user') || '""')
@@ -29,9 +27,10 @@ const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
       </Grid>
       <Grid item container alignItems="center" spacing={3}>
         <Grid item xs={6}><Field fullWidth label="Number of rounds" name="numberOfRounds" component={Input} type="number" /></Grid>
-        <Grid item xs={6}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={difficulties} /></Grid>
+        <Grid item xs={6}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={[ "Kid" ]} /></Grid>
       </Grid>      
       <Grid item container alignItems="center" spacing={3}>
+        <Grid item xs={6}><Field fullWidth label="Type" name="type" component={InputSelect} array={[ "Math - Algebra" ]} /></Grid>
         <Grid item xs={6}><Field fullWidth disabled label="Private" name="private" component={CheckboxInput} type="number" /></Grid>
       </Grid>
       <Button color="primary" variant="contained" type="submit">Create</Button>
@@ -44,5 +43,5 @@ GameForm.propTypes = { ...propTypes }
 export const formName = 'gameForm'
 
 export default reduxForm({ form: formName, initialValues: {
-  maxPlayers: 10, roundDuration: 10, numberOfRounds: 15, difficulty: "Kid"
+  maxPlayers: 10, roundDuration: 10, numberOfRounds: 15, difficulty: 0, type: 0
 } })(GameForm)
