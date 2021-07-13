@@ -1,0 +1,30 @@
+{
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "es6": true
+  },
+  "plugins": [
+    "react-redux"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-redux/recommended"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "linebreak-style": [
+        "error",
+        "unix"
+    ],
+    "semi": [
+        "error",
+        "never"
+    ],
+    "no-console": "error"
+  }
+}

@@ -1,0 +1,1 @@
+export const SET_LEVEL = '@app/SET_LEVEL'
