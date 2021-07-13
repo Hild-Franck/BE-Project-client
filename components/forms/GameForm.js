@@ -4,8 +4,11 @@ import Grid from '@material-ui/core/Grid'
 import { Field, Form, reduxForm, propTypes } from 'redux-form'
 
 import Input from './../inputs/Input'
+import InputSelect from './../inputs/InputSelect'
 import CheckboxInput from './../inputs/CheckboxInput'
 import createWebSocket, { ws } from '../../websocket'
+
+const difficulties = [ "Kid", "Easy", "Medium", "Hard" ]
 
 const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
   const onSubmit = values => {
@@ -26,8 +29,11 @@ const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
       </Grid>
       <Grid item container alignItems="center" spacing={3}>
         <Grid item xs={6}><Field fullWidth label="Number of rounds" name="numberOfRounds" component={Input} type="number" /></Grid>
-        <Grid item xs={6}><Field fullWidth disabled label="Private" name="private" component={CheckboxInput} type="number" /></Grid>
+        <Grid item xs={6}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={difficulties} /></Grid>
       </Grid>      
+      <Grid item container alignItems="center" spacing={3}>
+        <Grid item xs={6}><Field fullWidth disabled label="Private" name="private" component={CheckboxInput} type="number" /></Grid>
+      </Grid>
       <Button color="primary" variant="contained" type="submit">Create</Button>
     </Grid>
   </Form>
@@ -38,5 +44,5 @@ GameForm.propTypes = { ...propTypes }
 export const formName = 'gameForm'
 
 export default reduxForm({ form: formName, initialValues: {
-  maxPlayers: 10, roundDuration: 10, numberOfRounds: 15
+  maxPlayers: 10, roundDuration: 10, numberOfRounds: 15, difficulty: "Kid"
 } })(GameForm)

@@ -16,7 +16,7 @@ const InputSelect = ({ array, label, fullWidth, ...props }) => <FormControl full
     component={Select}
     {...props}
   >
-    {array.map(value => <MenuItem key={value} value={value}>
+    {array.map((value, i) => <MenuItem key={value} value={i}>
       {value}
     </MenuItem>)}
   </Input>
