@@ -14,10 +14,10 @@ const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
     createWebSocket(token, dispatch)
     setTimeout(() => {
       ws.send(JSON.stringify({
-        type: "CREATE_LOBBY", payload: { ...values, type: 1 }
+        type: "CREATE_LOBBY", payload: { ...values }
       }))
       closeModal()
-    }, 200)
+    }, 500)
   }
   return <Form  noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
     <Grid container spacing={3}>
@@ -27,7 +27,7 @@ const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
       </Grid>
       <Grid item container alignItems="center" spacing={3}>
         <Grid item xs={6}><Field fullWidth label="Number of rounds" name="numberOfRounds" component={Input} type="number" /></Grid>
-        <Grid item xs={6}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={[ "Kid" ]} /></Grid>
+        <Grid item xs={6}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={[ "Kid", "Easy" ]} /></Grid>
       </Grid>      
       <Grid item container alignItems="center" spacing={3}>
         <Grid item xs={6}><Field fullWidth label="Type" name="type" component={InputSelect} array={[ "Math - Algebra" ]} /></Grid>
