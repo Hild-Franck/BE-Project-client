@@ -1,6 +1,7 @@
 import { addMessage } from './ducks/main'
 import { setCurrentLobby, addLobby, addPlayer, answerQuestion, resetPlayers } from './ducks/lobby'
 import { setLevel } from './ducks/game'
+import config from './config'
 
 const messageTypes = {
   GAME_STARTED: (data, dispatch) => {
@@ -43,7 +44,7 @@ export let ws = null
 
 const createWebsocket = (token, dispatch) => {
   document.cookie = `authorization=${token}`
-  ws = new WebSocket("ws://localhost:8081")
+  ws = new WebSocket(`ws://${config.apiUrl}:8081`)
 
   ws.onmessage = ({ data }) => {
     const msg = JSON.parse(data)

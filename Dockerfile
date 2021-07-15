@@ -10,7 +10,7 @@ RUN npm install
 
 COPY ./ ./
 
-ARG API_URL="http://localhost:8080"
+ARG API_URL="localhost"
 
 RUN npm run build
 
