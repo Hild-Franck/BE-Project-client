@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import Grid from '@material-ui/core/Grid'
+import FavoriteIcon from '@material-ui/icons/Favorite'
+import HighlightOffIcon from '@material-ui/icons/HighlightOff'
 
 const states = {
 	pending: "white",
@@ -18,14 +20,19 @@ const useStyles = makeStyles({
 	})
 })
 
-const PlayerCard = ({ state, player, score, ...props }) => {
+const PlayerCard = ({ state, player, score, lives, mode, ...props }) => {
 	const classes = useStyles({state})
 
 	return <Card className={classes.root} {...props}>
 		<CardContent>
 			<Grid container spacing={2} direction="column" justify="center" alignItems="center">
 				<p>{player}</p>
-				<p>{score}</p>
+				{mode == "br"
+					? (lives < 0 ? 0 : lives)
+						? <p>{Array(lives).fill().map(() => <FavoriteIcon color="primary" />)}</p>
+						: <p><HighlightOffIcon color="error" /></p>
+					: <p>{score}</p>
+				}
 			</Grid>
 		</CardContent>
 	</Card>
@@ -34,7 +41,9 @@ const PlayerCard = ({ state, player, score, ...props }) => {
 PlayerCard.propTypes = {
 	state: PropTypes.string,
 	player: PropTypes.any,
-	score: PropTypes.number
+	score: PropTypes.number,
+	lives: PropTypes.number,
+	mode: PropTypes.string
 }
 
 export default PlayerCard

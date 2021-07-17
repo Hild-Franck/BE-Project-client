@@ -1,5 +1,7 @@
 import { addMessage } from './ducks/main'
-import { setCurrentLobby, addLobby, addPlayer, answerQuestion, resetPlayers } from './ducks/lobby'
+import {
+  setCurrentLobby, addLobby, addPlayer, answerQuestion, resetPlayers, looseLife
+} from './ducks/lobby'
 import { setLevel } from './ducks/game'
 import config from './config'
 
@@ -37,6 +39,9 @@ const messageTypes = {
   },
   PLAYER_ANSWERED: (data, dispatch) => {
     dispatch(answerQuestion(data))
+  },
+  LIFE_LOST: (data, dispatch) => {
+    dispatch(looseLife(data))
   }
 }
 

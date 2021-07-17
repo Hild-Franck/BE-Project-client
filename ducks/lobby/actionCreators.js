@@ -1,6 +1,7 @@
 import {
 	GET_ALL_LOBBIES, GET_ALL_LOBBIES_SUCCESS, GET_ALL_LOBBIES_FAIL,
-  SET_CURRENT_LOBBY, ADD_LOBBY, ADD_PLAYER, QUESTION_ANSWERED, RESET_PLAYERS
+  SET_CURRENT_LOBBY, ADD_LOBBY, ADD_PLAYER, QUESTION_ANSWERED, RESET_PLAYERS,
+  LIFE_LOST
 } from './actions'
 
 export const getAllLobbies = () => ({
@@ -30,4 +31,9 @@ export const answerQuestion = data => ({
 
 export const resetPlayers = () => ({
   type: RESET_PLAYERS
+})
+
+export const looseLife = data => ({
+  type: LIFE_LOST,
+  payload: data
 })

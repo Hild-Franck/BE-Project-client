@@ -37,7 +37,10 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
       Start Game
     </Button>}
     <Grid container justify="center">
-      {Object.keys(players).sort((a, b) => players[b].score - players[a].score).map(p => <PlayerCard player={p} score={players[p].score} state={players[p].currentAnswer} key={p} />)}
+      {lobby.mode == "br"
+        ?Object.keys(players).sort((a, b) => players[b].lives - players[a].lives).map(p => <PlayerCard player={p} score={players[p].score} lives={players[p].lives} state={players[p].currentAnswer} mode={lobby.mode} key={p} />)
+        : Object.keys(players).sort((a, b) => players[b].score - players[a].score).map(p => <PlayerCard player={p} score={players[p].score} lives={players[p].lives} state={players[p].currentAnswer} mode={lobby.mode} key={p} />)
+      }
     </Grid>
     {game.level ? <Grid direction="column" container alignItems="center">
       <Grid item><h1>Round {game.level}</h1></Grid>

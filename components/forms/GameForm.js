@@ -21,6 +21,9 @@ const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
   }
   return <Form  noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
     <Grid container spacing={3}>
+    <Grid item container alignItems="center" spacing={3}>
+        <Grid item xs={12}><Field fullWidth label="Game mode" name="mode" component={InputSelect} array={["Normal", "Battle Royale"]} /></Grid>
+      </Grid>
       <Grid item container alignItems="center" spacing={3}>
         <Grid item xs={6}><Field fullWidth label="Max players" name="maxPlayers" component={Input} type="number" /></Grid>
         <Grid item xs={6}><Field fullWidth label="Round duration" name="roundDuration" component={Input} type="number" /></Grid>
@@ -43,5 +46,6 @@ GameForm.propTypes = { ...propTypes }
 export const formName = 'gameForm'
 
 export default reduxForm({ form: formName, initialValues: {
-  maxPlayers: 10, roundDuration: 10, numberOfRounds: 15, difficulty: 0, type: 0
+  maxPlayers: 10, roundDuration: 10, numberOfRounds: 15, difficulty: 0, type: 0,
+  mode: 0
 } })(GameForm)
