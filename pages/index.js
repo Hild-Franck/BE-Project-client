@@ -26,7 +26,7 @@ const Index = ({ dispatch, lobbies, username, currentLobby }) => {
       ws.send(JSON.stringify({ 
         type: "JOIN_LOBBY", payload: { lobby: id }
       }))
-    }, 200)
+    }, 500)
   }
   const handleCreate = () => {
     dispatch(setData("game", {}))
