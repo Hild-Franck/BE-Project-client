@@ -65,7 +65,12 @@ export const reducer = (state = initialState, action) => {
     case LIFE_LOST:
       return {
         ...state,
-        players: Object.keys(state.players).reduce((acc, player) => ({ ...acc, [player]: { ...state.players[player], lives: --state.players[player].lives } }), {})
+        players: {
+          ...state.players, [action.payload.username]: {
+            ...state.players[action.payload.username],
+            lives: --state.players[action.payload.username].lives
+          }
+        }
       }
     default:
       return state

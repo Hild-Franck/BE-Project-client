@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField'
 
 import { ws } from '../websocket'
 import PlayerCard from '../components/PlayerCard'
+import StopWatch from '../components/StopWatch'
 
 const Game = ({ currentLobby, game, players, lobbies, username }) => {
   const [answer, setAnswer] = useState("")
@@ -29,7 +30,7 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
     setAnswer("")
   }
   const lobby = lobbies.find(l => l.id == currentLobby)
-
+  
   return <div>
     <h1>Game</h1>
     <h2>Lobby {currentLobby}</h2>
@@ -38,11 +39,12 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
     </Button>}
     <Grid container justify="center">
       {lobby.mode == "br"
-        ?Object.keys(players).sort((a, b) => players[b].lives - players[a].lives).map(p => <PlayerCard player={p} score={players[p].score} lives={players[p].lives} state={players[p].currentAnswer} mode={lobby.mode} key={p} />)
+        ? Object.keys(players).sort((a, b) => players[b].lives - players[a].lives).map(p => <PlayerCard player={p} score={players[p].score} lives={players[p].lives} state={players[p].currentAnswer} mode={lobby.mode} key={p} />)
         : Object.keys(players).sort((a, b) => players[b].score - players[a].score).map(p => <PlayerCard player={p} score={players[p].score} lives={players[p].lives} state={players[p].currentAnswer} mode={lobby.mode} key={p} />)
       }
     </Grid>
     {game.level ? <Grid direction="column" container alignItems="center">
+      <Grid item><StopWatch end={game.end} /></Grid>
       <Grid item><h1>Round {game.level}</h1></Grid>
       <Grid item><Typography variant="h2">{game.proposition}</Typography></Grid>
       <Grid item><form onSubmit={handleAnswer}>
