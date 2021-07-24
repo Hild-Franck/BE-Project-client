@@ -33,7 +33,7 @@ const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
         <Grid item xs={6}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={[ "Kid", "Easy" ]} /></Grid>
       </Grid>      
       <Grid item container alignItems="center" spacing={3}>
-        <Grid item xs={6}><Field fullWidth label="Type" name="type" component={InputSelect} array={[ "Math - Algebra" ]} /></Grid>
+        <Grid item xs={6}><Field fullWidth label="Type" name="type" component={InputSelect} array={[ "Math - Algebra", "Histoire - Evenements" ]} /></Grid>
         <Grid item xs={6}><Field fullWidth disabled label="Private" name="private" component={CheckboxInput} type="number" /></Grid>
       </Grid>
       <Button color="primary" variant="contained" type="submit">Create</Button>

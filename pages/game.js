@@ -30,6 +30,8 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
     setAnswer("")
   }
   const lobby = lobbies.find(l => l.id == currentLobby)
+
+  const proposition = game.proposition ? game.proposition.split("\n") : []
   
   return <div>
     <h1>Game</h1>
@@ -46,7 +48,7 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
     {game.level ? <Grid direction="column" container alignItems="center">
       <Grid item><StopWatch end={game.end} /></Grid>
       <Grid item><h1>Round {game.level}</h1></Grid>
-      <Grid item><Typography variant="h2">{game.proposition}</Typography></Grid>
+      <Grid item>{proposition.map(p => <Typography align="center" variant="h3">{p}</Typography>)}</Grid>
       <Grid item><form onSubmit={handleAnswer}>
         <TextField value={answer} onChange={handleChange} placeholder="Answer:" variant="outlined" />
       </form></Grid>
