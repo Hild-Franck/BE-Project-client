@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import Chip from '@material-ui/core/Chip'
 import Button from '@material-ui/core/Button'
 
-import { getAllLobbies } from '../ducks/lobby'
+import { getAllLobbies, setCurrentLobby } from '../ducks/lobby'
 import { setData } from '../ducks/modal'
 import createWebSocket, { ws } from '../websocket'
 
@@ -31,11 +31,20 @@ const Index = ({ dispatch, lobbies, username, currentLobby }) => {
   const handleCreate = () => {
     dispatch(setData("game", {}))
   }
+  const handleLeave = () => {
+    ws.send(JSON.stringify({
+      type: "LEAVE_LOBBY", payload: { lobby: currentLobby }
+    }))
+    dispatch(setCurrentLobby(null))
+  }
   const handleRefresh = () => dispatch(getAllLobbies())
 
   return <div>
     <h1>Home</h1>
-    <Button onClick={handleCreate} variant="contained">Create Lobby</Button>
+    {currentLobby
+      ? <Button onClick={handleLeave} variant="contained">Leave lobby</Button>
+      : <Button onClick={handleCreate} variant="contained">Create Lobby</Button>
+    }
     <Button onClick={handleRefresh} variant="contained" color="primary">Refresh</Button>
     <hr />
     <Grid container wrap="nowrap" spacing={3} direction="column">
