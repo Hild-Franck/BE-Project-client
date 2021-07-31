@@ -9,6 +9,11 @@ import { getAllLobbies, setCurrentLobby } from '../ducks/lobby'
 import { setData } from '../ducks/modal'
 import createWebSocket, { ws } from '../websocket'
 
+const types = [
+  "Math - Algebra",
+  "History - Events"
+]
+
 const states = {
   "PENDING": <Chip label="Waiting for players" />,
   "STARTING": <Chip color="secondary" label="Starting" />
@@ -38,7 +43,7 @@ const Index = ({ dispatch, lobbies, username, currentLobby }) => {
     dispatch(setCurrentLobby(null))
   }
   const handleRefresh = () => dispatch(getAllLobbies())
-
+  console.log("lobbies:", lobbies)
   return <div>
     <h1>Home</h1>
     {currentLobby
@@ -50,8 +55,8 @@ const Index = ({ dispatch, lobbies, username, currentLobby }) => {
     <Grid container wrap="nowrap" spacing={3} direction="column">
       {lobbies.map(l => <Grid key={l.id} alignItems="center" container item>
         <Grid item xs={3}>{l.id == currentLobby
-          ? <strong>Math - additions*</strong>
-          : "Math - additions"
+          ? <strong>{types[l.type]}*</strong>
+          : types[l.type]
         }</Grid>
         <Grid item xs={2}>Owner: {l.owner == username ? "You" : l.owner}</Grid>
         <Grid item xs={1}>{l.players ?? "?"} / {l.maxPlayers || "?"}</Grid>
