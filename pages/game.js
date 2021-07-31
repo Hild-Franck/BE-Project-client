@@ -48,7 +48,14 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
     {game.level ? <Grid direction="column" container alignItems="center">
       <Grid item><StopWatch end={game.end} /></Grid>
       <Grid item><h1>Round {game.level}</h1></Grid>
-      <Grid item>{proposition.map(p => <Typography align="center" variant="h3">{p}</Typography>)}</Grid>
+      <Grid item>{proposition.map((p, i) => {
+        return i === 0
+          ? p.match(/\.png$/)
+            ? <img src={p} style={{ minWidth: 128 }} />
+            : <Typography align="center" variant="h4">{p}</Typography>
+          : <Typography align="center" variant="h5">[{p}]</Typography>
+      })}
+          </Grid>
       <Grid item><form onSubmit={handleAnswer}>
         <TextField value={answer} onChange={handleChange} placeholder="Answer:" variant="outlined" />
       </form></Grid>
