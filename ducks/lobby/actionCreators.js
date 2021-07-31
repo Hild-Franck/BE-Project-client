@@ -1,7 +1,7 @@
 import {
 	GET_ALL_LOBBIES, GET_ALL_LOBBIES_SUCCESS, GET_ALL_LOBBIES_FAIL,
-  SET_CURRENT_LOBBY, ADD_LOBBY, ADD_PLAYER, QUESTION_ANSWERED, RESET_PLAYERS,
-  LIFE_LOST
+  SET_CURRENT_LOBBY, ADD_LOBBY, ADD_PLAYER, REMOVE_PLAYER, QUESTION_ANSWERED,
+  RESET_PLAYERS, LIFE_LOST
 } from './actions'
 
 export const getAllLobbies = () => ({
@@ -22,6 +22,11 @@ export const addLobby = lobby => ({
 export const addPlayer = username => ({
   type: ADD_PLAYER,
   payload: username
+})
+
+export const removePlayer = data => ({
+  type: REMOVE_PLAYER,
+  payload: data
 })
 
 export const answerQuestion = data => ({

@@ -1,7 +1,7 @@
 import {
 	GET_ALL_LOBBIES, GET_ALL_LOBBIES_SUCCESS, GET_ALL_LOBBIES_FAIL,
-  SET_CURRENT_LOBBY, ADD_LOBBY, ADD_PLAYER, QUESTION_ANSWERED, RESET_PLAYERS,
-  LIFE_LOST
+  SET_CURRENT_LOBBY, ADD_LOBBY, ADD_PLAYER, REMOVE_PLAYER, QUESTION_ANSWERED,
+  RESET_PLAYERS, LIFE_LOST
 } from './actions'
 
 const initialState = {
@@ -47,6 +47,13 @@ export const reducer = (state = initialState, action) => {
         players: { ...state.players, ...action.payload.reduce((acc, a) => ({
           ...acc, [a]: { score: 0, currentAnswer: "pending", lives: 3 }
         }), {}) }
+      }
+    case REMOVE_PLAYER:
+      return {
+        ...state,
+        players: Object.keys(state.players)
+          .filter((username) => action.payload.username !== username)
+          .reduce((acc, username) => ({ ...acc, [username]: state.players[username] }), {}),
       }
     case QUESTION_ANSWERED:
       return {

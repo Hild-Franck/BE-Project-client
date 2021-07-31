@@ -1,6 +1,7 @@
 import { addMessage } from './ducks/main'
 import {
-  setCurrentLobby, addLobby, addPlayer, answerQuestion, resetPlayers, looseLife
+  setCurrentLobby, addLobby, addPlayer, removePlayer, answerQuestion, resetPlayers,
+  looseLife
 } from './ducks/lobby'
 import { setLevel } from './ducks/game'
 import config from './config'
@@ -33,6 +34,10 @@ const messageTypes = {
   PLAYER_JOINED: (data, dispatch) => {
     dispatch(addMessage(`Player ${data.username} joined the lobby`))
     dispatch(addPlayer([data.username]))
+  },
+  PLAYER_LEFT: (data, dispatch) => {
+    dispatch(addMessage(`Player ${data.username} left the lobby`))
+    dispatch(removePlayer(data))
   },
   GAME_STARTING: (data, dispatch) => {
     dispatch(addMessage("Game is starting soon !"))
