@@ -43,7 +43,7 @@ const Index = ({ dispatch, lobbies, username, currentLobby }) => {
     dispatch(setCurrentLobby(null))
   }
   const handleRefresh = () => dispatch(getAllLobbies())
-  console.log("lobbies:", lobbies)
+
   return <div>
     <h1>Home</h1>
     {currentLobby
