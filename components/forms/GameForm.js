@@ -1,14 +1,15 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
-import { Field, Form, reduxForm, propTypes } from 'redux-form'
+import { Field, Form, reduxForm, formValueSelector, propTypes } from 'redux-form'
 
 import Input from './../inputs/Input'
 import InputSelect from './../inputs/InputSelect'
 import CheckboxInput from './../inputs/CheckboxInput'
 import createWebSocket, { ws } from '../../websocket'
 
-const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
+const GameForm = ({ handleSubmit, dispatch, closeModal, mode }) => {
   const onSubmit = values => {
     const { token } = JSON.parse(localStorage.getItem('user') || '""')
     createWebSocket(token, dispatch)
@@ -19,18 +20,19 @@ const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
       closeModal()
     }, 500)
   }
+  const width = mode === 1 ? 12 : 6
   return <Form  noValidate autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
     <Grid container spacing={3}>
     <Grid item container alignItems="center" spacing={3}>
         <Grid item xs={12}><Field fullWidth label="Game mode" name="mode" component={InputSelect} array={["Normal", "Battle Royale"]} /></Grid>
       </Grid>
       <Grid item container alignItems="center" spacing={3}>
-        <Grid item xs={6}><Field fullWidth label="Max players" name="maxPlayers" component={Input} type="number" /></Grid>
-        <Grid item xs={6}><Field fullWidth label="Round duration" name="roundDuration" component={Input} type="number" /></Grid>
+        <Grid item xs={width}><Field fullWidth label="Max players" name="maxPlayers" component={Input} type="number" /></Grid>
+        {mode !== 1 && <Grid item xs={6}><Field fullWidth label="Round duration" name="roundDuration" component={Input} type="number" /></Grid>}
       </Grid>
       <Grid item container alignItems="center" spacing={3}>
-        <Grid item xs={6}><Field fullWidth label="Number of rounds" name="numberOfRounds" component={Input} type="number" /></Grid>
-        <Grid item xs={6}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={[ "Kid", "Easy" ]} /></Grid>
+        {mode !== 1 && <Grid item xs={6}><Field fullWidth label="Number of rounds" name="numberOfRounds" component={Input} type="number" /></Grid>}
+        <Grid item xs={width}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={[ "Kid", "Easy" ]} /></Grid>
       </Grid>      
       <Grid item container alignItems="center" spacing={3}>
         <Grid item xs={6}><Field fullWidth label="Type" name="type" component={InputSelect} array={[
@@ -46,8 +48,11 @@ const GameForm = ({ handleSubmit, dispatch, closeModal }) => {
 GameForm.propTypes = { ...propTypes }
 
 export const formName = 'gameForm'
+const selector = formValueSelector(formName)
 
-export default reduxForm({ form: formName, initialValues: {
+const form = reduxForm({ form: formName, initialValues: {
   maxPlayers: 10, roundDuration: 10, numberOfRounds: 15, difficulty: 0, type: 0,
   mode: 0
 } })(GameForm)
+
+export default connect(state => ({ mode: selector(state, "mode") }))(form)
