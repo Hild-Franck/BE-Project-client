@@ -56,9 +56,10 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
           : <Typography align="center" variant="h5">[{p}]</Typography>
       })}
           </Grid>
-      <Grid item><form onSubmit={handleAnswer}>
-        <TextField value={answer} onChange={handleChange} placeholder="Answer:" variant="outlined" />
-      </form></Grid>
+      <Grid item><form onSubmit={handleAnswer}><Grid container direction="row" alignItems="center">
+        <Grid item><TextField value={answer} onChange={handleChange} placeholder="Answer:" variant="outlined" /></Grid>
+        <Grid item><Button size="large" variant="contained" color="primary" type="submit">Send</Button></Grid>
+      </Grid></form></Grid>
     </Grid> : ""}
   </div>
 }
