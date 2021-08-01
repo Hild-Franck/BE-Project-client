@@ -36,7 +36,7 @@ const GameForm = ({ handleSubmit, dispatch, closeModal, mode }) => {
       </Grid>      
       <Grid item container alignItems="center" spacing={3}>
         <Grid item xs={6}><Field fullWidth label="Type" name="type" component={InputSelect} array={[
-          "Math - Algebra", "Histoire - Evenements", "Geographie - Drapeaux"
+          "Math - Algebra", "Histoire - Evenements", "Geographie - Drapeaux", "Harry Potter - Sorts"
         ]} /></Grid>
         <Grid item xs={6}><Field fullWidth disabled label="Private" name="private" component={CheckboxInput} type="number" /></Grid>
       </Grid>

@@ -12,7 +12,8 @@ import createWebSocket, { ws } from '../websocket'
 const types = [
   "Math - Algebra",
   "Histoire - Evenements",
-  "Geographie - Drapeaux"
+  "Geographie - Drapeaux",
+  "Harry Potter - Sorts"
 ]
 
 const states = {
