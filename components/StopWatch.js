@@ -24,7 +24,7 @@ const StopWatch = ({ end=0 }) => {
   }, [end])
 
   return <div>
-    <Typography variant="h3">{time}</Typography>
+    <Typography variant="h3">{time+1}</Typography>
   </div>
 }
 

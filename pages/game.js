@@ -48,18 +48,24 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
     {game.level ? <Grid direction="column" container alignItems="center">
       <Grid item><StopWatch end={game.end} /></Grid>
       <Grid item><h1>Round {game.level}</h1></Grid>
-      <Grid item>{proposition.map((p, i) => {
-        return i === 0
-          ? p.match(/\.png$/)
-            ? <img src={p} style={{ minWidth: 128 }} />
-            : <Typography align="center" variant="h4">{p}</Typography>
-          : <Typography align="center" variant="h5">[{p}]</Typography>
-      })}
-          </Grid>
-      <Grid item><form onSubmit={handleAnswer}><Grid container direction="row" alignItems="center">
-        <Grid item><TextField value={answer} onChange={handleChange} placeholder="Answer:" variant="outlined" /></Grid>
+      {game.answer
+        ? <Grid item>
+          <Typography align="center" variant="h3">Reponse:</Typography>
+          <Typography align="center" variant="h4">{game.answer}</Typography>
+        </Grid>
+        : <Grid item>{proposition.map((p, i) => {
+            return i === 0
+              ? p.match(/\.png$/)
+                ? <img src={p} style={{ minWidth: 128 }} />
+                : <Typography align="center" variant="h4">{p}</Typography>
+              : <Typography align="center" variant="h5">[{p}]</Typography>
+          })}
+        </Grid>
+      }
+      {!game.answer && <Grid item><form onSubmit={handleAnswer}><Grid container direction="row" alignItems="center">
+        <Grid item><TextField autoFocus value={answer} onChange={handleChange} placeholder="Answer:" variant="outlined" /></Grid>
         <Grid item><Button size="large" variant="contained" color="primary" type="submit">Send</Button></Grid>
-      </Grid></form></Grid>
+      </Grid></form></Grid>}
     </Grid> : ""}
   </div>
 }

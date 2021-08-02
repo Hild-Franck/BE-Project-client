@@ -3,13 +3,17 @@ import {
   setCurrentLobby, addLobby, addPlayer, removePlayer, answerQuestion, resetPlayers,
   looseLife
 } from './ducks/lobby'
-import { setLevel } from './ducks/game'
+import { setLevel, setPause } from './ducks/game'
 import config from './config'
 
 const messageTypes = {
   GAME_STARTED: (data, dispatch) => {
     dispatch(addMessage("Game have started !"))
     dispatch(setLevel(data))
+  },
+  GAME_PAUSE: (data, dispatch) => {
+    dispatch(addMessage("End of round !"))
+    dispatch(setPause(data))
   },
   IN_PROGRESS: (data, dispatch) => {
     dispatch(addMessage("New question !"))
