@@ -29,9 +29,10 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
     }))
     setAnswer("")
   }
-  const lobby = lobbies.find(l => l.id == currentLobby)
 
+  const lobby = lobbies.find(l => l.id == currentLobby)
   const proposition = game.proposition ? game.proposition.split("\n") : []
+  const answered = players[username]?.currentAnswer != "pending"
   
   return <div>
     <h1>Game</h1>
@@ -63,8 +64,8 @@ const Game = ({ currentLobby, game, players, lobbies, username }) => {
         </Grid>
       }
       {!game.answer && <Grid item><form onSubmit={handleAnswer}><Grid container direction="row" alignItems="center">
-        <Grid item><TextField autoFocus value={answer} onChange={handleChange} placeholder="Answer:" variant="outlined" /></Grid>
-        <Grid item><Button size="large" variant="contained" color="primary" type="submit">Send</Button></Grid>
+        <Grid item><TextField disabled={answered} autoFocus value={answer} onChange={handleChange} placeholder="Answer:" variant="outlined" /></Grid>
+        <Grid item><Button disabled={answered} size="large" variant="contained" color="primary" type="submit">Send</Button></Grid>
       </Grid></form></Grid>}
     </Grid> : ""}
   </div>
