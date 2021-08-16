@@ -31,7 +31,9 @@ const GameForm = ({ handleSubmit, dispatch, closeModal, mode }) => {
         {mode !== 1 && <Grid item xs={6}><Field fullWidth label="Round duration" name="roundDuration" component={Input} type="number" /></Grid>}
       </Grid>
       <Grid item container alignItems="center" spacing={3}>
-        {mode !== 1 && <Grid item xs={6}><Field fullWidth label="Number of rounds" name="numberOfRounds" component={Input} type="number" /></Grid>}
+        {mode !== 1
+          ? <Grid item xs={6}><Field fullWidth label="Number of rounds" name="numberOfRounds" component={Input} type="number" /></Grid>
+          : <Grid item xs={6}><Field fullWidth label="Number of lives" name="numberOfLives" component={Input} type="number" /></Grid>}
         <Grid item xs={width}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={[ "Kid", "Easy" ]} /></Grid>
       </Grid>      
       <Grid item container alignItems="center" spacing={3}>
@@ -52,7 +54,7 @@ const selector = formValueSelector(formName)
 
 const form = reduxForm({ form: formName, initialValues: {
   maxPlayers: 10, roundDuration: 10, numberOfRounds: 15, difficulty: 0, type: 0,
-  mode: 0
+  mode: 0, numberOfLives: 3
 } })(GameForm)
 
 export default connect(state => ({ mode: selector(state, "mode") }))(form)
