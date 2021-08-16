@@ -34,7 +34,7 @@ const GameForm = ({ handleSubmit, dispatch, closeModal, mode }) => {
         {mode !== 1
           ? <Grid item xs={6}><Field fullWidth label="Number of rounds" name="numberOfRounds" component={Input} type="number" /></Grid>
           : <Grid item xs={6}><Field fullWidth label="Number of lives" name="numberOfLives" component={Input} type="number" /></Grid>}
-        <Grid item xs={width}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={[ "Kid", "Easy" ]} /></Grid>
+        <Grid item xs={6}><Field fullWidth label="Difficulty" name="difficulty" component={InputSelect} array={[ "Kid", "Easy" ]} /></Grid>
       </Grid>      
       <Grid item container alignItems="center" spacing={3}>
         <Grid item xs={6}><Field fullWidth label="Type" name="type" component={InputSelect} array={[

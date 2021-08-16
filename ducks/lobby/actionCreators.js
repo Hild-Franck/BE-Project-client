@@ -9,9 +9,9 @@ export const getAllLobbies = () => ({
   promise: client => client.get("/lobby/getall")
 })
 
-export const setCurrentLobby = id => ({
+export const setCurrentLobby = (id, numberOfLives) => ({
   type: SET_CURRENT_LOBBY,
-  payload: id
+  payload: { id, numberOfLives }
 })
 
 export const addLobby = lobby => ({

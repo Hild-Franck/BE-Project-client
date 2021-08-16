@@ -9,7 +9,8 @@ const initialState = {
   error: null,
   data: [],
   players: {},
-  currentLobby: ""
+  currentLobby: "",
+  numberOfLives: 0
 }
 
 export const reducer = (state = initialState, action) => {
@@ -34,7 +35,8 @@ export const reducer = (state = initialState, action) => {
     case SET_CURRENT_LOBBY:
       return {
         ...state,
-        currentLobby: action.payload
+        currentLobby: action.payload.id,
+        numberOfLives: Number(action.payload.numberOfLives)
       }
     case ADD_LOBBY:
       return {
@@ -45,7 +47,7 @@ export const reducer = (state = initialState, action) => {
       return {
         ...state,
         players: { ...state.players, ...action.payload.reduce((acc, a) => ({
-          ...acc, [a]: { score: 0, currentAnswer: "pending", lives: 3 }
+          ...acc, [a]: { score: 0, currentAnswer: "pending", lives: state.numberOfLives }
         }), {}) }
       }
     case REMOVE_PLAYER:

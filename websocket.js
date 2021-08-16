@@ -26,13 +26,13 @@ const messageTypes = {
   },
   LOBBY_CREATED: (data, dispatch) => {
     dispatch(addMessage(`Lobby ${data.lobby.id} created`))
-    dispatch(setCurrentLobby(data.lobby.id))
+    dispatch(setCurrentLobby(data.lobby.id, data.lobby.numberOfLives))
     dispatch(addLobby(data.lobby))
     dispatch(addPlayer([data.lobby.owner]))
   },
   LOBBY_JOINED: (data, dispatch) => {
     dispatch(addMessage(`Joined lobby ${data.lobby.id}`))
-    dispatch(setCurrentLobby(data.lobby.id))
+    dispatch(setCurrentLobby(data.lobby.id, data.lobby.numberOfLives))
     dispatch(addPlayer(data.players))
   },
   PLAYER_JOINED: (data, dispatch) => {
